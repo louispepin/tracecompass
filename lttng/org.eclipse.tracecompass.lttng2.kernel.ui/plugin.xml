@@ -18,6 +18,12 @@
             name="Virtual Machine View"
             restorable="true">
       </view>
+      <view
+            class="org.eclipse.tracecompass.internal.lttng2.kernel.ui.view.combinedview.CombinedView"
+            id="org.eclipse.tracecompass.internal.lttng2.kernel.ui.view.combinedview"
+            name="Combined View"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.navigator.navigatorContent">
