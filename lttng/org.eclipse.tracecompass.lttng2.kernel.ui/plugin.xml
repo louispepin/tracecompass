@@ -19,7 +19,7 @@
             restorable="true">
       </view>
       <view
-            class="org.eclipse.tracecompass.internal.lttng2.kernel.ui.view.combinedview.CombinedView"
+            class="org.eclipse.tracecompass.internal.lttng2.kernel.ui.views.combinedview.CombinedView"
             id="org.eclipse.tracecompass.internal.lttng2.kernel.ui.view.combinedview"
             name="Combined View"
             restorable="true">

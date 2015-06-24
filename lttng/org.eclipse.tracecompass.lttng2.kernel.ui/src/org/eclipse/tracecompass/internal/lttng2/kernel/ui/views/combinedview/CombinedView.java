@@ -1,4 +1,4 @@
-package org.eclipse.tracecompass.internal.lttng2.kernel.ui.view.combinedview;
+package org.eclipse.tracecompass.internal.lttng2.kernel.ui.views.combinedview;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;

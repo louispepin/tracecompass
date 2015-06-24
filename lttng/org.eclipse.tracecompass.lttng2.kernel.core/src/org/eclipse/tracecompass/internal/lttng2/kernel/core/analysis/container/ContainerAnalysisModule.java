@@ -26,6 +26,7 @@ import org.eclipse.tracecompass.tmf.core.statesystem.TmfStateSystemAnalysisModul
 import org.eclipse.tracecompass.tmf.core.trace.ITmfTrace;
 import org.eclipse.tracecompass.tmf.core.trace.TmfTraceManager;
 import org.eclipse.tracecompass.tmf.core.trace.TmfTraceUtils;
+import org.eclipse.tracecompass.tmf.core.trace.experiment.TmfExperiment;
 
 /**
  * Module for the container CPU analysis. It tracks the status of the CPU across
@@ -52,9 +53,10 @@ public class ContainerAnalysisModule extends TmfStateSystemAnalysisModule {
         ITmfTrace trace = getTrace();
         Lttng27EventLayout layout;
 
-        if (!(trace instanceof LttngKernelTrace)) {
+        if (!(trace instanceof LttngKernelTrace) && !(trace instanceof TmfExperiment)) {
             throw new IllegalStateException();
         }
+
         layout = Lttng27EventLayout.INSTANCE;
         return new ContainerStateProvider(trace, layout);
     }
