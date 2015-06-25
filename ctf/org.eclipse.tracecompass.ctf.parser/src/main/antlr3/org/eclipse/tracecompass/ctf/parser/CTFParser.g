@@ -132,24 +132,22 @@ import java.util.HashSet;
     void addTypeName(String name) {
         $Symbols::types.add(name);
         if (verbose) {
-            debug_print("New type: " + name);
+            debug_print("New type: " + name +  " " + $declaration);
         }
     }
 
-    boolean _inTypedef = false;
-
     void typedefOn() {
-        debug_print("typedefOn");
-        _inTypedef = true;
+        debug_print("typedefOn" + $declaration);
+        $declaration::isTypedef=true;
     }
 
     void typedefOff() {
-        debug_print("typedefOff");
-        _inTypedef = false;
+        debug_print("typedefOff" + $declaration);
+        $declaration::isTypedef=false;
     }
 
     boolean inTypedef() {
-        return _inTypedef;
+        return $declaration::isTypedef;
     }
 
     boolean _inTypealiasAlias = false;
@@ -223,9 +221,14 @@ postfixExpressionSuffix
       -> ^($ref ^(UNARY_EXPRESSION_STRING IDENTIFIER))
   ;
 
+postfixCtfExpression
+  : (ref=DOT) ctfSpecifierHead
+      -> ^($ref ^(UNARY_EXPRESSION_STRING ctfSpecifierHead))
+  ;
+
 postfixExpression
-  : primaryExpression postfixExpressionSuffix*
-  | ctfSpecifierHead postfixExpressionSuffix+  // added for ctf-v1.8
+  : (primaryExpression postfixExpressionSuffix*)
+  | (ctfSpecifierHead postfixCtfExpression* postfixExpressionSuffix+) // added for ctf-v1.8
   ;
 
 unaryExpression
@@ -242,10 +245,11 @@ enumConstant
 // 2.2
 
 declaration
-@after {
-    if (inTypedef()) {
-        typedefOff();
-    }
+scope{
+  boolean isTypedef;
+}
+@init {
+  typedefOff();
 }
   : declarationSpecifiers declaratorList? TERM
       // When the declaration is completely parsed and was a typedef,
@@ -367,7 +371,7 @@ structOrVariantDeclaration
        declarationSpecifiers
          (
            /* If we met a "typedef" */
-           {inTypedef()}? => declaratorList {typedefOff();}
+           {inTypedef()}? => declaratorList
              -> ^(TYPEDEF declaratorList declarationSpecifiers)
            | structOrVariantDeclaratorList
              -> ^(SV_DECLARATION declarationSpecifiers structOrVariantDeclaratorList)
