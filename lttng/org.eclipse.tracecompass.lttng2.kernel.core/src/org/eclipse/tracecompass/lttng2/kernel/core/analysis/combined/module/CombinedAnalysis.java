@@ -27,13 +27,10 @@ public class CombinedAnalysis extends TmfAbstractAnalysisModule
     /** ID of the Analysis */
     public static final String ID = "org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.module.CombinedAnalysis"; //$NON-NLS-1$
 
-    private final CountDownLatch fInitialized = new CountDownLatch(1);
-
     private final TmfStateSystemAnalysisModule vmModule = new VirtualMachineCpuAnalysis();
     private final TmfStateSystemAnalysisModule containerModule = new ContainerAnalysisModule();
 
-    ITmfStateSystem vmModuleSS;
-    ITmfStateSystem containerModuleSS;
+    private final CountDownLatch fInitialized = new CountDownLatch(1);
 
     /**
      * Constructor
@@ -81,11 +78,10 @@ public class CombinedAnalysis extends TmfAbstractAnalysisModule
         }
 
         /* Wait until the two modules are initialized */
-        vmModule.waitForInitialization();
-        containerModule.waitForInitialization();
+        waitForInitialization();
 
-        vmModuleSS = vmModule.getStateSystem();
-        containerModuleSS = containerModule.getStateSystem();
+        ITmfStateSystem vmModuleSS = vmModule.getStateSystem();
+        ITmfStateSystem containerModuleSS = containerModule.getStateSystem();
 
         if (vmModuleSS == null || containerModuleSS == null) {
             /* This analysis was cancelled in the meantime */
@@ -131,5 +127,11 @@ public class CombinedAnalysis extends TmfAbstractAnalysisModule
         list.add(vmModule.getStateSystem());
         list.add(containerModule.getStateSystem());
         return list;
+    }
+
+    @Override
+    public void waitForInitialization() {
+        vmModule.waitForInitialization();
+        containerModule.waitForInitialization();
     }
 }
