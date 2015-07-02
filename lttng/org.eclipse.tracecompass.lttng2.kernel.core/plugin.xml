@@ -17,8 +17,8 @@
             name="Virtual Machine Experiment">
       </experiment>
       <experiment
-            experiment_type="org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.trace.CombinedExperiment"
-            id="org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.trace"
+            experiment_type="org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.trace.CombinedExperiment"
+            id="org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.trace.CombinedExperiment"
             name="Combined Experiment">
       </experiment>
    </extension>
@@ -35,13 +35,14 @@
             </tracetype>
       </module>
       <module
-            analysis_module="org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.module.CombinedAnalysis"
-            id="org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.module"
+            analysis_module="org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.module.CombinedAnalysis"
+            automatic="false"
+            id="org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.module.CombinedAnalysis"
             name="Combined Analysis">
-         <tracetype
-               applies="true"
-               class="org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.trace.CombinedExperiment">
-         </tracetype>
+	         <tracetype
+	               applies="true"
+	               class="org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.trace.CombinedExperiment">
+	         </tracetype>
       </module>
    </extension>
    <extension
@@ -51,10 +52,10 @@
             automatic="true"
             id="org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.container"
             name="Container Analysis">
-         <tracetype
-               applies="true"
-               class="org.eclipse.tracecompass.lttng2.kernel.core.trace.LttngKernelTrace">
-         </tracetype>
+	         <tracetype
+	               applies="true"
+	               class="org.eclipse.tracecompass.lttng2.kernel.core.trace.LttngKernelTrace">
+	         </tracetype>
       </module>
    </extension>
 </plugin>

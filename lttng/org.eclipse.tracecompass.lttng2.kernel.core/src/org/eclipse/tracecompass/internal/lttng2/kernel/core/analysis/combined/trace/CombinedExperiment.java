@@ -1,4 +1,4 @@
-package org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.trace;
+package org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.trace;
 
 import static org.eclipse.tracecompass.common.core.NonNullUtils.checkNotNull;
 

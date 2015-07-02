@@ -1,4 +1,4 @@
-package org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.module;
+package org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.module;
 
 import java.util.LinkedList;
 import java.util.List;

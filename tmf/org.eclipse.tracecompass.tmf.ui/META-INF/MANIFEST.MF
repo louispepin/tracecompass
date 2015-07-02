@@ -92,4 +92,4 @@ Import-Package: com.google.common.base,
  com.google.common.collect,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore,
- org.eclipse.tracecompass.lttng2.kernel.core.analysis.combined.module
+ org.eclipse.tracecompass.internal.lttng2.kernel.core.analysis.combined.module

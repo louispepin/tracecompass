@@ -2,7 +2,8 @@ package org.eclipse.tracecompass.internal.lttng2.kernel.ui.views.combinedview;
 
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.tracecompass.tmf.ui.views.statesystem.TmfStateSystemViewer;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.SWT;
 
 
 //import java.util.Collection;
@@ -13,7 +14,9 @@ import org.eclipse.tracecompass.tmf.ui.views.statesystem.TmfStateSystemViewer;
  *
  * @author Louis Pepin
  */
-public class CombinedViewer extends TmfStateSystemViewer {
+public class CombinedViewer {
+
+    Label label;
 
     /**
      * Default constructor
@@ -22,7 +25,7 @@ public class CombinedViewer extends TmfStateSystemViewer {
      *          The parent containing this viewer
      */
     public CombinedViewer(final Composite parent) {
-        super(parent);
+        label = new Label(parent, SWT.WRAP);
+        label.setText("Hello World");
     }
-
 }
